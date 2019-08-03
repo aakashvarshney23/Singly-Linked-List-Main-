@@ -106,6 +106,20 @@ public:
             temp = temp->next;
         }
         while (temp != nullptr);
+        cout << "\n";
+    }
+
+    void reverse_linked_list(){
+        node *temp = head;
+        node *next = nullptr;
+        node *prev = nullptr;
+        while (temp != nullptr) {
+            next = temp->next;
+            temp->next = prev;
+            prev = temp;
+            temp = next;
+        }
+        head = prev;
     }
 };
 
@@ -117,8 +131,10 @@ int main() {
     a.addAtTail(3);
     a.addAtTail(4);
     a.addAtTail(5);
-    a.addAtIndex(0, 18);
     a.deleteAtIndex(5);
-    cout << "Size of the linked list is: " << a.size() << endl;
     a.print();
+    cout << "Size of the linked list is: " << a.size() << endl;
+    a.reverse_linked_list();
+    a.print();
+
 }
