@@ -87,7 +87,7 @@ public:
         }
 
     }
-
+  // Shows the updated size of the linked list
     int size() {
         int count = 0;
         node *temp = head;
@@ -98,7 +98,7 @@ public:
         while (temp != nullptr);
         return count;
     }
-
+ // Prints the linked list with the arrows.
     void print(){
         node *temp = head;
         do{
@@ -108,7 +108,7 @@ public:
         while (temp != nullptr);
         cout << "\n";
     }
-
+ // Reverse a given singly linked list
     void reverse_linked_list(){
         node *temp = head;
         node *next = nullptr;
