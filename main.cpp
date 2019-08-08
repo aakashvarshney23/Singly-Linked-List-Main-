@@ -21,6 +21,13 @@ public:
 
     /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
     int get(int index) {
+        node *temp = head;
+        if (temp != nullptr){
+            for (int i =0; i < index; i++) {
+                temp = temp->next;
+            }
+        }
+        return temp->val;
     }
 
     /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
@@ -91,23 +98,34 @@ public:
     int size() {
         int count = 0;
         node *temp = head;
-        do{
+        if (temp == nullptr)
+            return count;
+        else{
+            do
+                {
             count++;
             temp = temp->next;
-        }
-        while (temp != nullptr);
+                }
+            while (temp != nullptr);
+            }
         return count;
     }
  // Prints the linked list with the arrows.
     void print(){
         node *temp = head;
+        if (temp == nullptr)
+            cout << "Empty list";
+        else{
+
         do{
+
             cout << temp->val << "->";
             temp = temp->next;
         }
-        while (temp != nullptr);
+        while (temp != nullptr);}
         cout << "\n";
     }
+
  // Reverse a given singly linked list
     void reverse_linked_list(){
         node *temp = head;
@@ -121,20 +139,62 @@ public:
         }
         head = prev;
     }
+
+    // merge two sorted linked lists
+    // The error here is that it terminates before reaching the null pointer. One of the element is left out.
+    MyLinkedList mergeTwoLinkedList(MyLinkedList b){
+        MyLinkedList c;
+
+        node *tempa = this->head;
+        node *tempb = b.head;
+
+        if ((this->size() !=0) && (b.size() == 0))
+            return *this;
+
+        else if ((this->size() == 0) && (b.size() != 0))
+            return b;
+
+        else if ((this->size()) && (b.size())) {
+
+            while (tempa && tempb){
+
+                if ((tempa->val) < (tempb->val)) {
+                    c.addAtTail(tempa->val);
+                    tempa = tempa->next;
+
+                } else if ((tempa->val) > (tempb->val)){
+                    c.addAtTail(tempb->val);
+                    tempb = tempb->next;
+                }
+            }
+        return c;
+        }
+    }
 };
 
 
 int main() {
     MyLinkedList a;
+    MyLinkedList b;
+    MyLinkedList c;
     a.addAtTail(1);
-    a.addAtTail(2);
     a.addAtTail(3);
-    a.addAtTail(4);
-    a.addAtTail(5);
-    a.deleteAtIndex(5);
+    a.addAtTail(25);
+    a.addAtTail(70);
+    a.addAtTail(85);
+    b.addAtTail(13);
+    b.addAtTail(14);
+    b.addAtTail(15);
+    b.addAtTail(16);
+    b.addAtTail(17);
+    b.addAtTail(18);
+    b.addAtTail(83);
     a.print();
-    cout << "Size of the linked list is: " << a.size() << endl;
-    a.reverse_linked_list();
-    a.print();
+    b.print();
+    cout << "A Size :" << a.size() << endl;
+    cout << "B Size :" << b.size() << endl;
+    c = b.mergeTwoLinkedList(a);
+    c.print();
+    cout << "C Size: " << c.size() << endl;
 
 }
