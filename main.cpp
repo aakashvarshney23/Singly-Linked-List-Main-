@@ -5,7 +5,8 @@ using namespace std;
 struct node {
     int val;
     node *next;
-    node (int x): val(x), next(nullptr) {}
+
+    node(int x) : val(x), next(nullptr) {}
 
 };
 
@@ -22,8 +23,8 @@ public:
     /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
     int get(int index) {
         node *temp = head;
-        if (temp != nullptr){
-            for (int i =0; i < index; i++) {
+        if (temp != nullptr) {
+            for (int i = 0; i < index; i++) {
                 temp = temp->next;
             }
         }
@@ -63,11 +64,11 @@ public:
         else if ((index == size()))
             addAtTail(val);
 
-        else if (index > size()|| (index == 0))
+        else if (index > size() || (index == 0))
             cout << "The node cannot be inserted because the index is too large" << endl;
 
         else {
-            for (int i = 2; i < index; i++){
+            for (int i = 2; i < index; i++) {
                 prev = prev->next;
             }
             next_node = prev->next;
@@ -85,8 +86,8 @@ public:
             cout << "Invalid";
         else if (index == 1)
             head = head->next;
-        else if (index <= size()){
-            for (int i =2; i < index; i++){
+        else if (index <= size()) {
+            for (int i = 2; i < index; i++) {
                 prev = prev->next;
             }
             next_node = prev->next;
@@ -94,40 +95,40 @@ public:
         }
 
     }
-  // Shows the updated size of the linked list
+
+    // Shows the updated size of the linked list
     int size() {
         int count = 0;
         node *temp = head;
         if (temp == nullptr)
             return count;
-        else{
-            do
-                {
-            count++;
-            temp = temp->next;
-                }
-            while (temp != nullptr);
-            }
+        else {
+            do {
+                count++;
+                temp = temp->next;
+            } while (temp != nullptr);
+        }
         return count;
     }
- // Prints the linked list with the arrows.
-    void print(){
+
+    // Prints the linked list with the arrows.
+    void print() {
         node *temp = head;
         if (temp == nullptr)
             cout << "Empty list";
-        else{
+        else {
 
-        do{
+            do {
 
-            cout << temp->val << "->";
-            temp = temp->next;
+                cout << temp->val << "->";
+                temp = temp->next;
+            } while (temp != nullptr);
         }
-        while (temp != nullptr);}
         cout << "\n";
     }
 
- // Reverse a given singly linked list
-    void reverse_linked_list(){
+    // Reverse a given singly linked list
+    void reverse_linked_list() {
         node *temp = head;
         node *next = nullptr;
         node *prev = nullptr;
@@ -142,32 +143,37 @@ public:
 
     // merge two sorted linked lists
     // The error here is that it terminates before reaching the null pointer. One of the element is left out.
-    MyLinkedList mergeTwoLinkedList(MyLinkedList b){
+    MyLinkedList mergeTwoLinkedList(MyLinkedList b) {
         MyLinkedList c;
 
         node *tempa = this->head;
         node *tempb = b.head;
 
-        if ((this->size() !=0) && (b.size() == 0))
+        if (b.head == nullptr)
             return *this;
-
-        else if ((this->size() == 0) && (b.size() != 0))
+        if (this->head == nullptr)
             return b;
 
-        else if ((this->size()) && (b.size())) {
-
-            while (tempa && tempb){
-
-                if ((tempa->val) < (tempb->val)) {
+        if (tempa && tempb) {
+            while (tempa && tempb)
+                if ((tempa->val) <= (tempb->val)) {
                     c.addAtTail(tempa->val);
                     tempa = tempa->next;
 
-                } else if ((tempa->val) > (tempb->val)){
+                } else if ((tempa->val) >= (tempb->val)) {
                     c.addAtTail(tempb->val);
                     tempb = tempb->next;
                 }
+            while (tempa != nullptr)
+            {
+                c.addAtTail(tempa->val);
+                tempa = tempa->next;
             }
-        return c;
+            while (tempb != nullptr){
+                c.addAtTail(tempb->val);
+                tempb = tempb->next;
+            }
+            return c;
         }
     }
 };
@@ -178,17 +184,16 @@ int main() {
     MyLinkedList b;
     MyLinkedList c;
     a.addAtTail(1);
-    a.addAtTail(3);
-    a.addAtTail(25);
-    a.addAtTail(70);
-    a.addAtTail(85);
-    b.addAtTail(13);
-    b.addAtTail(14);
-    b.addAtTail(15);
-    b.addAtTail(16);
+    a.addAtTail(21);
+    a.addAtTail(31);
+    a.addAtTail(40);
+    a.addAtTail(50);
+    a.addAtTail(61);
     b.addAtTail(17);
-    b.addAtTail(18);
+    b.addAtTail(81);
+    b.addAtTail(82);
     b.addAtTail(83);
+    b.addAtTail(84);
     a.print();
     b.print();
     cout << "A Size :" << a.size() << endl;
